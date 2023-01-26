@@ -1,0 +1,57 @@
+﻿@model ToDoList.ViewModel.UserTaskViewModel
+
+@{
+    ViewData["Name"] = "Створення завдання";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>Створити завдання</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskState" class="control-label"></label>
+                <select asp-for="TaskState.Name" asp-items="@ViewBag.taskStates" class="form-control"></select>
+                <span asp-validation-for="TaskState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskLevel" class="control-label"></label>
+                <select asp-for="TaskLevel.Name" asp-items="@ViewBag.taskLevels" class="form-control"></select>
+                <span asp-validation-for="TaskLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Time" class="control-label"></label>
+                <input asp-for="Time" class="form-control" />
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div> <br />
+            <div class="form-group">
+                <input type="submit" value="Створити" class="btn btn-primary" />
+            </div>
+        </form> <br />
+        <form>
+            <button asp-action="Index">Назад до списку завдань</button>
+        </form>
+    </div>
+</div>
+
+

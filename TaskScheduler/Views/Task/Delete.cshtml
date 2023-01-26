@@ -1,0 +1,71 @@
+﻿@model ToDoList.ViewModel.UserTaskViewModel
+
+@{
+    ViewData["Name"] = "Видалення завдання";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<h3>Видалення завдання</h3>
+
+<h4>Ви дійсно хочете видалити вибране завдання?</h4>
+<div>
+    <h5>@Html.DisplayFor(model => model.Name)</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <b>Опис завдання</b>
+                </th>
+                <th>
+                    <b>Пріоритет завдання</b>
+                </th>
+                <th>
+                    <b>Статус завдання</b>
+                </th>
+                <th>
+                    <b>Дата виконання</b>
+                </th>
+                <th>
+                    <b>Час виконання</b>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => modelItem.Description)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => modelItem.TaskLevel.Name)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => modelItem.TaskState.Name)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => modelItem.Date)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => modelItem.Time)
+                </th>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-4">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Видалити" />
+            </form>
+        </div>
+        <div class="col-4">
+            <form>
+                <button asp-action="Index">Назад до списку завдань</button>
+            </form>
+        </div>
+    </div>
+</div>

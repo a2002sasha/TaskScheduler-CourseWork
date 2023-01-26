@@ -1,0 +1,45 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    @if (ViewData["Name"] is null)
+    {
+        <title>TO-DO LIST</title>
+    }
+    else
+    {
+        <title>@ViewData["Name"]</title>
+    }
+    @await Html.PartialAsync("_Metatags")
+    @await Html.PartialAsync("_Styles")
+</head>
+<body class="no-sidebar is-preload">
+<div id="page-wrapper">
+
+    <!-- Header Wrapper -->
+    @await Html.PartialAsync("_Header")
+
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="wrapper style2">
+            <div class="inner">
+                <div class="container">
+                    <div id="content">
+
+                        <!-- Content -->
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Wrapper -->
+    @await Html.PartialAsync("_Footer")
+
+</div>
+
+<!-- Scripts -->
+@await Html.PartialAsync("_Scripts")
+</body>
+</html>
+

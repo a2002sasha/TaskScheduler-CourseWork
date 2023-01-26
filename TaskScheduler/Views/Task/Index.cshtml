@@ -1,0 +1,88 @@
+﻿@model ToDoList.ViewModel.UserTaskViewModel
+@using ToDoList.DataAccess.Model
+@{
+    ViewData["Name"] = "Мої завдання";
+}
+@{
+    Layout = "_Layout";
+}
+
+<form method="get">
+    <div class="form-inline">
+        <label>Назва завдання: </label>
+        <input name="name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+
+        <label>Пріоритет завдання: </label>
+        <select name="level" asp-items="Model.FilterViewModel.TaskLevels" class="form-control"></select> <br />
+
+        <input type="submit" value="Фільтр" class="btn btn-outline-dark" />
+    </div>
+</form>
+
+<h3>Завдання на виконання</h3>
+
+<form>
+    <button asp-action="Create">Додати завдання</button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-level="@(Model.FilterViewModel.SelectedLevel)">Назва</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.DescriptionSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-level="@(Model.FilterViewModel.SelectedLevel)">Опис</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.TaskLevelSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-level="@(Model.FilterViewModel.SelectedLevel)">Пріоритет</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.TaskStateSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-level="@(Model.FilterViewModel.SelectedLevel)">Статус завдання</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.DateSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-level="@(Model.FilterViewModel.SelectedLevel)">Дата виконання</a>
+        </th>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.TimeSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedName)"
+               asp-route-level="@(Model.FilterViewModel.SelectedLevel)">Час виконання</a>
+        </th>
+    </tr>
+    @foreach (UserTask u in Model.UserTasks)
+    {
+        <tr>
+            <th>@u.Name</th>
+            <th>@u.Description</th>
+            <th>@u.TaskLevel.Name</th>
+            <th>@u.TaskState.Name</th>
+            <th>@u.Date</th>
+            <th>@u.Time</th>
+            <th>
+                @if (u.TaskState.Name != "Завершено")
+                {
+                    <b><a asp-action="Edit" asp-route-id="@u.Id">Редагувати</a> | </b>
+                }
+                <b>
+                    <a asp-action="Delete" asp-route-id="@u.Id">Видалити</a>
+                </b>
+            </th>
+        </tr>
+    }
+</table>
+

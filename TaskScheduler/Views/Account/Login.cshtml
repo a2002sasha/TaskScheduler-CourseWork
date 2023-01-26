@@ -1,0 +1,55 @@
+﻿@model ToDoList.ViewModel.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Вхід</title>
+    @await Html.PartialAsync("_Styles")
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2>Вхід на сайт</h2>
+            <hr />
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4 aln-center">
+            <form asp-action="Login" asp-controller="Account" asp-antiforgery="true" asp-route-returnUrl="@ViewBag.ReturnUrl" accesskeymethod="Post">
+                <div class="form-group">
+                    <label asp-for="UserName">Login (email)</label>
+                    <input asp-for="UserName" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div form-group>
+                    <label asp-for="RememberMe"></label>
+                    <input asp-for="RememberMe" />
+                    <span asp-validation-for="RememberMe"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Увійти" />
+                </div>
+                <br />
+                <div class="form-group">
+                    <a asp-action="Registration" asp-controller="Account">
+                        <input type="button" value="Реєстрація"/>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
